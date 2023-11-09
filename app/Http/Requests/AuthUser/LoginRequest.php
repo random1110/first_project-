@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\AuthUser;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CountryRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class CountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:5'
+            'phone_number' => 'required|integer|max:10',
+            'password' => 'required|string|min:8'
         ];
     }
 }

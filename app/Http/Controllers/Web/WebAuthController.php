@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Http\Requests\LoginRequest;
+namespace App\Http\Controllers\Web;
+use App\Http\Requests\AuthUser\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\AuthUser\RegisterUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Controller;
 
 class WebAuthController extends Controller
 {
@@ -20,7 +20,7 @@ class WebAuthController extends Controller
 
     public function login(LoginRequest $request) {
         if(auth()->attempt(['phone_number' => $request->phone_number,'password' => $request->password])) {
-            return redirect()->route('dashboard.users.index')->with([
+            return redirect()->route('users.index')->with([
                 'success' => true,
                 'message' => 'Successfully Login'
             ]);
@@ -42,7 +42,7 @@ class WebAuthController extends Controller
             ['password' => Hash::make($request->password)]
         ));
         if($user->save()) {
-            return redirect()->route('dashboard.user.index')->with(
+            return redirect()->route('web.index')->with(
                 [
                     'success' => true,
                     'message' => 'Account Register Successfully'
@@ -60,13 +60,14 @@ class WebAuthController extends Controller
     public function logout() {
         Session::flush();
         auth()->logout();
-        return redirect()->route('login')->with([
+        return redirect()->route('web.login')->with([
             'success' => true,
             'message' => 'Successfully Logout'
         ]);
     }
 
-    public function pro() {
+    public function profile() {
         return auth()->user();
     }
+
 }
