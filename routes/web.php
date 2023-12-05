@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin/'], function (){
+    Route::group(['prefix' => 'dashboard/'], function () {
+        Route::get('',[AdminHomeController::class,'index'])->name('admin.index');
+    });
     Route::group(['prefix' => 'auth/'], function () {
-    Route::post('login',[AdminAuthController::class , 'login'])->name('admin.login.post');
-    Route::get('login',[AdminAuthController::class  , 'loginShow'])->name('admin.login');
-    Route::get('logout',[AdminAuthController::class , 'logout'])->name('admin.logout');
+        Route::post('login',[AdminAuthController::class , 'login'])->name('admin.login.post');
+        Route::get('login',[AdminAuthController::class  , 'loginShow'])->name('admin.login');
+        Route::get('logout',[AdminAuthController::class , 'logout'])->name('admin.logout');
     });
     Route::group(['prefix' => 'categories/'], function() {
         Route::get('', [AdminCategoriesController::class,'index'])->name('admin.categories.index');
@@ -53,13 +56,11 @@ Route::group(['prefix' => '/'], function (){
 
 
 
-Route::get('/users', [UsersController::class,'index']);
-Route::get('/carts', [CartsController::class,'index']);
-Route::get('/orders', [OrdersController::class,'index']);
-Route::get('/products', [ProductsController::class,'index']);
-Route::get('/subscriptios', [SubscriptiosController::class,'index']);
-
-
+// Route::get('/users', [UsersController::class,'index']);
+// Route::get('/carts', [CartsController::class,'index']);
+// Route::get('/orders', [OrdersController::class,'index']);
+// Route::get('/products', [ProductsController::class,'index']);
+// Route::get('/subscriptios', [SubscriptiosController::class,'index']);
 
 
 

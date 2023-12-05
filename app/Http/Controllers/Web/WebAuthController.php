@@ -20,7 +20,7 @@ class WebAuthController extends Controller
 
     public function login(LoginRequest $request) {
         if(auth()->attempt(['phone_number' => $request->phone_number,'password' => $request->password])) {
-            return redirect()->route('users.index')->with([
+            return redirect()->route('web.index')->with([
                 'success' => true,
                 'message' => 'Successfully Login'
             ]);

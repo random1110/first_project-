@@ -16,7 +16,7 @@ class AdminAuthController extends Controller
 
 public function login(LoginRequest $request) {
     if(auth('admin')->attempt(['phone_number' => $request->phone_number,'password' => $request->password])) {
-        return redirect()->route('dashboard.admin.index')->with([
+        return redirect()->route('admin.index')->with([
             'success' => true,
             'message' => 'Successfully Login'
         ]);
